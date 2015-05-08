@@ -8,8 +8,10 @@ $app = new \Slim\Slim(array(
 ));
 
 // Prepare view
-//$view = new \Slim\View();
 $view = new \Slim\Views\Twig();
+$view->parserExtensions = array(
+    new \Slim\Views\TwigExtension(),
+);
 $app->view($view);
 
 // Define routes
@@ -18,18 +20,29 @@ $app->get('/', function () use ($app) {
     $app->log->info("Slim-Skeleton '/' route");
     // Render index view
     $app->render('index.twig', [
-		'message' => 'test my nerves'
+		'title' => 'test my',
+		'description' => 'nerves',
 	]);
     //$app->render('index.html');
-});
+})->name('home');
 
 $app->get('/about', function () use ($app) {
     // Render index view
     $app->render('about.twig', [
 		'message' => 'test my nerves'
 	]);
-    //$app->render('index.html');
+})->name('about');
+
+$app->post('/', function () use ($app) {
+
+    $app->log->info('POST to / :'.json_encode($app->request->post()));
+
+	$app->redirectTo('home');
 });
+
+
+
+
 
 // Run app
 $app->run();
