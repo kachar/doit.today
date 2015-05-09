@@ -6,3 +6,6 @@
 .DS_STORE
 composer.lock
 **.swp
+.settings
+.buildpath
+.project
