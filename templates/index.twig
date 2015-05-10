@@ -29,15 +29,27 @@
         <div class="row">
             <div class="col-lg-6 text-left">
                 <div class="btn-group" role="group" aria-label="">
-                  <a type="button" href="{{ urlFor('home') }}" class="btn btn-default btn-sm btn-clear" data-type="all">All</a>
-                  <a type="button" href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm btn-clear" data-type="active">Active</a>
-                  <a type="button" href="{{ urlFor('home',{filter:'completed'}) }}" class="btn btn-default btn-sm btn-clear" data-type="completed">Completed</a>
+                    <a type="button" href="{{ urlFor('home') }}" class="btn btn-default btn-sm btn-clear" data-type="all">All</a>
+                    <a type="button" href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm btn-clear" data-type="active">
+                        <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                        Active
+                    </a>
+                    <a type="button" href="{{ urlFor('home',{filter:'completed'}) }}" class="btn btn-default btn-sm btn-clear" data-type="completed">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                        Completed
+                    </a>
                 </div>
             </div>
             <div class="col-lg-6 text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default btn-sm btn-clear" data-type="completed">Clear completed</button>
-                  <button type="button" class="btn btn-default btn-sm btn-clear" data-type="all">Clear all</button>
+                    <button type="button" class="btn btn-default btn-sm btn-clear" data-type="completed">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        Clear completed
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm btn-clear" data-type="all">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 
+                        Clear all
+                    </button>
                 </div>
             </div>
         </div>
