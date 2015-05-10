@@ -14,9 +14,11 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <!-- Font Awesome CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- Awesome checkbox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.4/awesome-bootstrap-checkbox.min.css">
 
     <!-- Custom styles for this template -->
@@ -32,24 +34,23 @@
   <body>
 
     <div class="container">
-    {% block header %}
-        {% include 'partials/header.twig' %}    
-    {% endblock header %}
-    {% block jumbo %}
-    {% endblock jumbo %}
+        {% block header %}
+            {% include 'partials/header.twig' %}
+        {% endblock header %}
 
+        {% block jumbo %}
+        {% endblock jumbo %}
 
-    <div class="row marketing">
-        {% block contents %}
-        {% endblock contents %}
-    </div>
+        <div class="row marketing">
+            {% block contents %}
+            {% endblock contents %}
+        </div>
 
-    {% block footer %}
-        <footer class="footer">
-            <p>&copy; This project has been made as presentation demo for <a href="http://beit.today/">beit.today Conference 2015</a></p>
-        </footer>
-    {% endblock footer %}
-    
+        {% block footer %}
+            <footer class="footer">
+                <p>&copy; This project has been made as presentation demo for <a href="http://beit.today/">beit.today Conference 2015</a></p>
+            </footer>
+        {% endblock footer %}
     </div> <!-- /container -->
 
     <!-- Latest compiled and minified JavaScript -->
