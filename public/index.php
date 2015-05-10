@@ -27,8 +27,6 @@ $createQuery = '
 ';
 $db->debug = true;
 
-$table = $db->todo();
-
 // Render about page
 $app->get('/about', function () use ($app) {
     // Render index view
@@ -47,17 +45,19 @@ $app->map('/', function () use ($app, $db) {
         
         // Get vars from POST
         $post = $app->request->post();
-        
-        // Save them to databse
-        $db->todo()->insert([
-            'id' => null,
-            'message' => $post['new-todo'],
-            'is_done' => false,
-            'created_at' => strftime('%F %T'),
-        ]);
+
+        if (!empty($post['new-todo'])) {
+            // Save them to databse
+            $db->todo()->insert([
+                'id' => null,
+                'message' => $post['new-todo'],
+                'is_done' => false,
+                'created_at' => strftime('%F %T'),
+            ]);
     
-        // Prevent double posting
-        $app->redirectTo('home');
+            // Prevent double posting
+            $app->redirectTo('home');
+        }
     }
 
     // Render index view
@@ -83,7 +83,6 @@ $app->delete('/todo/:id', function ($id) use ($app, $db) {
 
     $app->log->info('Delete row #'.$id);
     
-    // Delete the record
     $db->todo(['id' => $id])->delete();
 });
 

@@ -1,10 +1,17 @@
 
 $('.checkbox input').on('change', function(){
-    var id = $(this).data('id');
+    var el = $(this);
+    var id = el.data('id');
+    var is_done = el.is(":checked");
+
+    // Mark row
+    el.parents('.list-group-item').toggleClass('list-group-item-success');
+    // Send the request
     $.post('do/'+id, {
         id: id,
-        is_done: $(this).is(":checked")
+        is_done: is_done
     }, function () {
+
         console.log('ready', id);
     });
 });
@@ -16,7 +23,10 @@ $('.checkbox .close').on('click', function(){
         url: 'todo/'+id,
         type: 'DELETE',
         success: function(result) {
-            el.parents('.list-group-item').slideUp('slow', function(){
+            var parent = el.parents('.list-group-item');
+
+            parent.toggleClass('list-group-item-danger');
+            parent.slideUp('slow', function(){
                 $(this).remove();
             });
         }
