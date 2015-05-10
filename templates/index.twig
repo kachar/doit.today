@@ -25,16 +25,16 @@
 {% else %}
     <li class="list-group-item list-group-item-info">Todo list is empty.</li>
 {% endfor %}
-    <li class="list-group-item text-right">
+    <li class="list-group-item">
         <div class="row">
-            <div class="col-lg-4 col-lg-push-3">
+            <div class="col-lg-6 text-left">
                 <div class="btn-group" role="group" aria-label="">
                   <a type="button" href="{{ urlFor('home') }}" class="btn btn-default btn-sm btn-clear" data-type="all">All</a>
                   <a type="button" href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm btn-clear" data-type="active">Active</a>
                   <a type="button" href="{{ urlFor('home',{filter:'completed'}) }}" class="btn btn-default btn-sm btn-clear" data-type="completed">Completed</a>
                 </div>
             </div>
-            <div class="col-lg-4 col-lg-push-4">
+            <div class="col-lg-6 text-right">
                 <div class="btn-group" role="group" aria-label="...">
                   <button type="button" class="btn btn-default btn-sm btn-clear" data-type="completed">Clear completed</button>
                   <button type="button" class="btn btn-default btn-sm btn-clear" data-type="all">Clear all</button>
