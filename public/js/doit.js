@@ -33,3 +33,15 @@ $('.checkbox .close').on('click', function(){
     });
 });
 
+$('button.btn-clear').on('click', function(){
+    var el = $(this);
+    var type = el.data('type');
+    $.ajax({
+        url: 'todo/clear/'+type,
+        type: 'DELETE',
+        success: function(result) {
+            location.reload();
+        }
+    });
+});
+

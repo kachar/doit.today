@@ -25,5 +25,11 @@
 {% else %}
     <li class="list-group-item list-group-item-info">Todo list is empty.</li>
 {% endfor %}
+    <li class="list-group-item text-right">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-default btn-sm btn-clear" data-type="completed">Clear completed</button>
+          <button type="button" class="btn btn-default btn-sm btn-clear" data-type="all">Clear all</button>
+        </div>
+    </li>
 </ul>
 {% endblock contents %}

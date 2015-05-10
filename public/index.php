@@ -75,7 +75,6 @@ $app->post('/do/:id', function ($id) use ($app, $db) {
     $db->todo(['id' => $id])->update([
         'is_done' => $app->request->post('is_done') == 'true',
     ]);
-
 });
 
 // Delete row
@@ -84,6 +83,16 @@ $app->delete('/todo/:id', function ($id) use ($app, $db) {
     $app->log->info('Delete row #'.$id);
     
     $db->todo(['id' => $id])->delete();
+});
+
+// Delete all
+$app->delete('/todo/clear/:type', function ($type) use ($app, $db) {
+
+    if ($type == 'all') {
+        $db->todo()->delete();
+    } elseif ($type == 'completed') {
+        $db->todo(['is_done' => 1])->delete();
+    }
 });
 
 // Run app
