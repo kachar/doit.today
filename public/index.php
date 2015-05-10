@@ -29,11 +29,13 @@ $db->debug = true;
 
 // Render about page
 $app->get('/about', function () use ($app) {
-    // Render index view
-    $app->render('about.twig', [
-        'message' => 'my test message'
-    ]);
+    $app->render('about.twig');
 })->name('about');
+
+// Resources page
+$app->get('/resources', function () use ($app) {
+    $app->render('resources.twig');
+})->name('resources');
 
 // Define index route
 $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
