@@ -17,16 +17,6 @@ $app->view($view);
 $pdo = new PDO('sqlite:../data/db.sqlite');
 $db = new NotORM($pdo);
 
-$createQuery = '
-    CREATE TABLE todo (
-        `id` integer primary key autoincrement,
-        `message` varchar(128), 
-        `is_done` integer, 
-        `created_at` varchar(20)
-    )
-';
-$db->debug = true;
-
 // Render about page
 $app->get('/about', function () use ($app) {
     $app->render('about.twig');
