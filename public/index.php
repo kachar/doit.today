@@ -63,6 +63,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
     // Render index view
     $app->render('index.twig', [
         'todoList' => $todoList,
+        'active_filter' => $filter
     ]);
 
 })->via('GET', 'POST')->name('home')->conditions(array('filter' => '(completed|active)'));
