@@ -4,6 +4,7 @@ $('.checkbox input').on('change', function(){
     var id = el.data('id');
     var is_done = el.is(":checked");
 
+    
     // Mark row
     el.parents('.list-group-item').toggleClass('list-group-item-success');
     // Send the request
@@ -11,8 +12,10 @@ $('.checkbox input').on('change', function(){
         id: id,
         is_done: is_done
     }, function () {
-
         console.log('ready', id);
+        
+        // Relad page after change 
+        location.reload();
     });
 });
 

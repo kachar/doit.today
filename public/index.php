@@ -36,7 +36,7 @@ $app->get('/about', function () use ($app) {
 })->name('about');
 
 // Define index route
-$app->map('/', function () use ($app, $db) {
+$app->map('/(:filter)', function ($filter = '') use ($app, $db) {
 
     // Handle post requests
     if ($app->request->isPost()) {    
@@ -56,16 +56,24 @@ $app->map('/', function () use ($app, $db) {
             ]);
     
             // Prevent double posting
-            $app->redirectTo('home');
+            $app->redirectTo('home', ['filter' => $filter]);
         }
     }
+    
+    
+    $todoList = $db->todo();
+    $todoList->order('id DESC');
+    
+    if (!empty($filter)){
+        $todoList->where(array("is_done" => $filter == 'completed' ? true : false ));
+    }    
 
     // Render index view
     $app->render('index.twig', [
-        'todoList' => $db->todo()->order('id DESC'),
+        'todoList' => $todoList,
     ]);
 
-})->via('GET', 'POST')->name('home');
+})->via('GET', 'POST')->name('home')->conditions(array('filter' => '(completed|active)'));
 
 // Update row status
 $app->post('/do/:id', function ($id) use ($app, $db) {
