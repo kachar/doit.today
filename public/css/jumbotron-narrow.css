@@ -4,12 +4,6 @@ body {
   padding-bottom: 20px;
 }
 
-.todo-form {
-  padding: 30px 15px;
-  margin-bottom: 30px;
-  color: inherit;
-  background-color: #eee;
-}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -61,7 +55,6 @@ body {
 /* Supporting marketing content */
 .marketing {
   margin: 40px 0;
-  margin-top: 0;
 }
 .marketing p + h4 {
   margin-top: 28px;

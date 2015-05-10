@@ -27,7 +27,7 @@
 {% endfor %}
     <li class="list-group-item">
         <div class="row">
-            <div class="col-lg-6 text-left">
+            <div class="col-md-6 text-left">
                 <div class="btn-group" role="group" aria-label="">
                     <a href="{{ urlFor('home') }}" class="btn btn-default btn-sm btn-clear {{ active_filter == '' ? 'active'}}" data-type="all">All</a>
                     <a href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm btn-clear {{ active_filter == 'active' ? 'active'}}" data-type="active">
@@ -40,7 +40,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6 text-right">
+            <div class="col-md-6 text-right">
                 <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default btn-sm btn-clear" data-type="completed">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
