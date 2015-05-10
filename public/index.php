@@ -14,35 +14,78 @@ $view->parserExtensions = array(
 );
 $app->view($view);
 
-// Define routes
-$app->get('/', function () use ($app) {
-    // Sample log message
-    $app->log->info("Slim-Skeleton '/' route");
-    // Render index view
-    $app->render('index.twig', [
-		'title' => 'test my',
-		'description' => 'nerves',
-	]);
-    //$app->render('index.html');
-})->name('home');
+$pdo = new PDO('sqlite:../data/db.sqlite');
+$db = new NotORM($pdo);
 
+$createQuery = '
+    CREATE TABLE todo (
+        `id` integer primary key autoincrement,
+        `message` varchar(128), 
+        `is_done` integer, 
+        `created_at` varchar(20)
+    )
+';
+$db->debug = true;
+
+$table = $db->todo();
+
+// Render about page
 $app->get('/about', function () use ($app) {
     // Render index view
     $app->render('about.twig', [
-		'message' => 'test my nerves'
-	]);
+        'message' => 'my test message'
+    ]);
 })->name('about');
 
-$app->post('/', function () use ($app) {
+// Define index route
+$app->map('/', function () use ($app, $db) {
 
-    $app->log->info('POST to / :'.json_encode($app->request->post()));
+    // Handle post requests
+    if ($app->request->isPost()) {    
+        // Sample log message
+        $app->log->info('Create new record.');
+        
+        // Get vars from POST
+        $post = $app->request->post();
+        
+        // Save them to databse
+        $db->todo()->insert([
+            'id' => null,
+            'message' => $post['new-todo'],
+            'is_done' => false,
+            'created_at' => strftime('%F %T'),
+        ]);
+    
+        // Prevent double posting
+        $app->redirectTo('home');
+    }
 
-	$app->redirectTo('home');
+    // Render index view
+    $app->render('index.twig', [
+        'todoList' => $db->todo()->order('id DESC'),
+    ]);
+
+})->via('GET', 'POST')->name('home');
+
+// Update row status
+$app->post('/do/:id', function ($id) use ($app, $db) {
+
+    $app->log->info('Update status of #'.$id);
+
+    $db->todo(['id' => $id])->update([
+        'is_done' => $app->request->post('is_done') == 'true',
+    ]);
+
 });
 
+// Delete row
+$app->delete('/todo/:id', function ($id) use ($app, $db) {
 
-
-
+    $app->log->info('Delete row #'.$id);
+    
+    // Delete the record
+    $db->todo(['id' => $id])->delete();
+});
 
 // Run app
 $app->run();
