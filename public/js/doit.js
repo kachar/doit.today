@@ -26,7 +26,7 @@ $('.checkbox .close').on('click', function(){
             var parent = el.parents('.list-group-item');
 
             parent.toggleClass('list-group-item-danger');
-            parent.slideUp('slow', function(){
+            parent.slideUp('normal', function(){
                 $(this).remove();
             });
         }
