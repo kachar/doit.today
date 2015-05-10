@@ -29,12 +29,12 @@
         <div class="row">
             <div class="col-md-6 text-left">
                 <div class="btn-group" role="group" aria-label="">
-                    <a href="{{ urlFor('home') }}" class="btn btn-default btn-sm btn-clear {{ active_filter == '' ? 'active'}}" data-type="all">All</a>
-                    <a href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm btn-clear {{ active_filter == 'active' ? 'active'}}" data-type="active">
+                    <a href="{{ urlFor('home') }}" class="btn btn-default btn-sm {{ active_filter == '' ? 'active' }}">All</a>
+                    <a href="{{ urlFor('home',{filter:'active'}) }}"  class="btn btn-default btn-sm {{ active_filter == 'active' ? 'active' }}">
                         <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
                         Active
                     </a>
-                    <a href="{{ urlFor('home',{filter:'completed'}) }}" class="btn btn-default btn-sm btn-clear {{ active_filter == 'completed' ? 'active'}}" data-type="completed">
+                    <a href="{{ urlFor('home',{filter:'completed'}) }}" class="btn btn-default btn-sm {{ active_filter == 'completed' ? 'active' }}">
                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                         Completed
                     </a>
