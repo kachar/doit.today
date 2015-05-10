@@ -6,16 +6,16 @@ $('.checkbox input').on('change', function(){
 
     
     // Mark row
-    el.parents('.list-group-item').toggleClass('list-group-item-success');
+    var parent = el.parents('.list-group-item');
+    parent.toggleClass('list-group-item-success');
+    parent.toggleClass('list-group-item-warning');
     // Send the request
     $.post('do/'+id, {
         id: id,
         is_done: is_done
     }, function () {
-        console.log('ready', id);
-        
         // Relad page after change 
-        location.reload();
+        // location.reload();
     });
 });
 

@@ -9,7 +9,7 @@
 {% block contents %}
 <ul class="list-group well well-sm">
 {% for todo in todoList %}
-    <li class="list-group-item{{ todo.is_done ? ' list-group-item-success' }}">
+    <li class="list-group-item{{ todo.is_done ? ' list-group-item-success' : ' list-group-item-warning' }}">
         <div class="row">
             <div class="col-lg-12">
                 <div class="checkbox checkbox-success">
