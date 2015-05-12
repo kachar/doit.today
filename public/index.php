@@ -67,7 +67,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
         'active_filter' => $filter,
     ]);
 
-})->via('GET', 'POST')->name('home')->conditions(['filter' => '(completed|active)']);
+})->via('GET', 'POST')->name('home')->conditions(['filter' => 'completed|active']);
 
 // Update row status
 $app->post('/do/:id', function ($id) use ($app, $db) {
