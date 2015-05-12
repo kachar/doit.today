@@ -28,7 +28,7 @@ $('.checkbox .close').on('click', function(){
         success: function(result) {
             var parent = el.parents('.list-group-item');
 
-            parent.toggleClass('list-group-item-danger');
+            parent.addClass('list-group-item-danger');
             parent.slideUp('normal', function(){
                 $(this).remove();
             });
