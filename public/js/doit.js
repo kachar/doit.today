@@ -1,12 +1,11 @@
 $('.checkbox input').on('change', function(){
     var el = $(this);
-    var id = el.data('id');
     var parent = el.parents('.list-group-item');
     
     parent.toggleClass('list-group-item-success');
     parent.toggleClass('list-group-item-warning');
     
-    $.post('do/'+id, {
+    $.post('do/'+el.data('id'), {
         is_done: el.is(":checked")
     });
 });
