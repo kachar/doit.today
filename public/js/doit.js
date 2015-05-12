@@ -7,7 +7,6 @@ $('.checkbox input').on('change', function(){
     parent.toggleClass('list-group-item-warning');
     
     $.post('do/'+id, {
-        id: id,
         is_done: el.is(":checked")
     });
 });
