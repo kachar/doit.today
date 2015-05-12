@@ -3,19 +3,19 @@
 require '../vendor/autoload.php';
 
 // Prepare app
-$app = new \Slim\Slim(array(
+$app = new \Slim\Slim([
     'templates.path' => '../templates',
-));
+]);
 
 // Prepare view
-$view = new \Slim\Views\Twig();
-$view->parserExtensions = array(
+$view                   = new \Slim\Views\Twig();
+$view->parserExtensions = [
     new \Slim\Views\TwigExtension(),
-);
+];
 $app->view($view);
 
 $pdo = new PDO('sqlite:../data/db.sqlite');
-$db = new NotORM($pdo);
+$db  = new NotORM($pdo);
 
 // Render about page
 $app->get('/about', function () use ($app) {
@@ -31,47 +31,46 @@ $app->get('/resources', function () use ($app) {
 $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
 
     // Handle post requests
-    if ($app->request->isPost()) {    
+    if ($app->request->isPost()) {
         // Sample log message
         $app->log->info('Create new record.');
-        
+
         // Get vars from POST
         $post = $app->request->post();
 
         if (!empty($post['new-todo'])) {
             // Save them to databse
             $db->todo()->insert([
-                'id' => null,
-                'message' => $post['new-todo'],
-                'is_done' => false,
+                'id'         => null,
+                'message'    => $post['new-todo'],
+                'is_done'    => false,
                 'created_at' => strftime('%F %T'),
             ]);
-    
+
             // Prevent double posting
             $app->redirectTo('home', ['filter' => $filter]);
         }
     }
-    
-    
+
     $todoList = $db->todo();
     $todoList->order('id DESC');
-    
-    if (!empty($filter)){
-        $todoList->where(array("is_done" => $filter == 'completed' ? true : false ));
-    }    
+
+    if (!empty($filter)) {
+        $todoList->where(["is_done" => $filter == 'completed' ? true : false]);
+    }
 
     // Render index view
     $app->render('index.twig', [
-        'todoList' => $todoList,
-        'active_filter' => $filter
+        'todoList'      => $todoList,
+        'active_filter' => $filter,
     ]);
 
-})->via('GET', 'POST')->name('home')->conditions(array('filter' => '(completed|active)'));
+})->via('GET', 'POST')->name('home')->conditions(['filter' => '(completed|active)']);
 
 // Update row status
 $app->post('/do/:id', function ($id) use ($app, $db) {
 
-    $app->log->info('Update status of #'.$id);
+    $app->log->info('Update status of #' . $id);
 
     $db->todo(['id' => $id])->update([
         'is_done' => $app->request->post('is_done') == 'true',
@@ -81,8 +80,8 @@ $app->post('/do/:id', function ($id) use ($app, $db) {
 // Delete row
 $app->delete('/todo/:id', function ($id) use ($app, $db) {
 
-    $app->log->info('Delete row #'.$id);
-    
+    $app->log->info('Delete row #' . $id);
+
     $db->todo(['id' => $id])->delete();
 });
 
@@ -98,4 +97,3 @@ $app->delete('/todo/clear/:type', function ($type) use ($app, $db) {
 
 // Run app
 $app->run();
-
