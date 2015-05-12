@@ -10,3 +10,4 @@ composer.lock
 .buildpath
 .project
 /data/db.sqlite
+sftp-config.json
