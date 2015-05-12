@@ -32,17 +32,19 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
 
     // Handle post requests
     if ($app->request->isPost()) {
-        // Sample log message
-        $app->log->info('Create new record.');
 
         // Get vars from POST
-        $post = $app->request->post();
+        $message = $app->request->post('new-todo');
+        $message = trim($message);
 
-        if (!empty($post['new-todo'])) {
+        if (!empty($message)) {
+
+            $app->log->info('Create new record.');
+
             // Save them to databse
             $db->todo()->insert([
                 'id'         => null,
-                'message'    => $post['new-todo'],
+                'message'    => $message,
                 'is_done'    => false,
                 'created_at' => strftime('%F %T'),
             ]);
