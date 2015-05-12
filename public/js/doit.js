@@ -36,7 +36,7 @@ $('.checkbox .close').on('click', function(){
     });
 });
 
-$('button.btn-clear').on('click', function(){
+$('.clear_buttons').on('click', function(){
     var el = $(this);
     var type = el.data('type');
     $.ajax({
