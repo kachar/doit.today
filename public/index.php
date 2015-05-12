@@ -58,7 +58,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
     $todoList->order('id DESC');
 
     if (!empty($filter)) {
-        $todoList->where(["is_done" => $filter == 'completed' ? true : false]);
+        $todoList->where(["is_done" => $filter == 'completed']);
     }
 
     // Render index view
