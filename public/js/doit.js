@@ -8,7 +8,9 @@ $('.checkbox input').on('change', function(){
     $.ajax({
         url: 'todo/'+el.data('id'),
         type: 'PUT',
-        data: 'is_done='+el.is(":checked")
+        data: {
+    		is_done: el.is(":checked")
+    	}
     });
 });
 
