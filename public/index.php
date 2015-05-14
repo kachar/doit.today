@@ -58,7 +58,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
 
     if (!empty($filter)) {
         $todoList->where([
-            "is_done" => ($filter == 'completed')
+            'is_done' => ($filter == 'completed')
         ]);
     }
 
