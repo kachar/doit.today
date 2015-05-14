@@ -70,7 +70,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
 })->via('GET', 'POST')->name('home')->conditions(['filter' => 'completed|active']);
 
 // Update row status
-$app->post('/do/:id', function ($id) use ($app, $db) {
+$app->put('/todo/:id', function ($id) use ($app, $db) {
 
     $app->log->info('Update status of #' . $id);
 

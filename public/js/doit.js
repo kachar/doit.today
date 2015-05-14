@@ -5,8 +5,10 @@ $('.checkbox input').on('change', function(){
     parent.toggleClass('list-group-item-success');
     parent.toggleClass('list-group-item-warning');
     
-    $.post('do/'+el.data('id'), {
-        is_done: el.is(":checked")
+    $.ajax({
+        url: 'todo/'+el.data('id'),
+        type: 'PUT',
+        data: 'is_done='+el.is(":checked")
     });
 });
 
