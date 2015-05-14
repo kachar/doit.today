@@ -54,11 +54,12 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
         }
     }
 
-    $todoList = $db->todo();
-    $todoList->order('id DESC');
+    $todoList = $db->todo()->order('id DESC');
 
     if (!empty($filter)) {
-        $todoList->where(["is_done" => $filter == 'completed']);
+        $todoList->where([
+            "is_done" => ($filter == 'completed')
+        ]);
     }
 
     // Render index view

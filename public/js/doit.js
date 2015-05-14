@@ -1,16 +1,16 @@
 $('.checkbox input').on('change', function(){
     var el = $(this);
     var parent = el.parents('.list-group-item');
-    
+
     parent.toggleClass('list-group-item-success');
     parent.toggleClass('list-group-item-warning');
-    
+
     $.ajax({
         url: 'todo/'+el.data('id'),
         type: 'PUT',
         data: {
-    		is_done: el.is(":checked")
-    	}
+            is_done: el.is(":checked")
+        }
     });
 });
 
