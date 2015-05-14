@@ -68,7 +68,7 @@ $app->map('/(:filter)', function ($filter = '') use ($app, $db) {
         'active_filter' => $filter,
     ]);
 
-})->via('GET', 'POST')->name('home')->conditions(['filter' => 'completed|active']);
+})->via('GET', 'POST')->name('home')->conditions(['filter' => 'active|completed']);
 
 // Update row status
 $app->put('/todo/:id', function ($id) use ($app, $db) {
@@ -76,7 +76,7 @@ $app->put('/todo/:id', function ($id) use ($app, $db) {
     $app->log->info('Update status of #' . $id);
 
     $db->todo(['id' => $id])->update([
-        'is_done' => $app->request->post('is_done') == 'true',
+        'is_done' => $app->request->put('is_done') == 'true',
     ]);
 });
 
@@ -96,7 +96,7 @@ $app->delete('/todo/clear/:type', function ($type) use ($app, $db) {
     } elseif ($type == 'completed') {
         $db->todo(['is_done' => 1])->delete();
     }
-});
+})->conditions(['type' => 'all|completed']);
 
 // Run app
 $app->run();
